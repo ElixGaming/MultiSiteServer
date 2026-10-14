@@ -1,0 +1,30 @@
+{
+  "devices": [
+    {
+      "id": "ax55",
+      "name": "AX55 (p2-r01-wifi01)",
+      "model": "Archer AX55 V1",
+      "vendor": "TP-Link",
+      "ip": "192.168.1.170",
+      "mac": "34-60-F9-D3-F2-88",
+      "location": "p2-r01",
+      "firmware": "1.5.12",
+      "mode": "Access Point",
+      "status": "online",
+      "notes": "Routeur / point d’accès principal"
+    },
+    {
+      "id": "pc",
+      "name": "PC (p2-r01-pc01)",
+      "model": "X280",
+      "vendor": "Lenovo",
+      "ip": "192.168.1.183",
+      "mac": "AC-15-A2-86-DF-6D",
+      "location": "p2-r01",
+      "firmware": "Windows 11 Pro",
+      "mode": "NO MODE",
+      "status": "online",
+      "notes": ""
+    }
+  ]
+}

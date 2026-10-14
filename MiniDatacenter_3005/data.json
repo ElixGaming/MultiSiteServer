@@ -1,0 +1,1 @@
+{"racks":[{"id":"rack1","name":"RACK 01","units":12,"items":[{"u":1,"name":"AX55","type":"ROUTER","status":"online","deviceId":"ax55"},{"u":2,"name":"LS1005G","type":"SWITCH","status":"online","deviceId":""},{"u":3,"name":"PC","type":"SERVER","status":"online","deviceId":"pc"}]}]}

@@ -1,0 +1,128 @@
+{
+  "nodes": [
+    {
+      "id": "freebox",
+      "name": "Freebox Pop",
+      "type": "Box / routeur",
+      "ip": "192.168.1.254",
+      "mac": "",
+      "description": "Passerelle principale",
+      "x": 100,
+      "y": 250
+    },
+    {
+      "id": "cpl1",
+      "name": "CPL 1",
+      "type": "CPL",
+      "ip": "",
+      "mac": "",
+      "description": "Liaison CPL",
+      "x": 300,
+      "y": 250
+    },
+    {
+      "id": "cpl2",
+      "name": "CPL 2",
+      "type": "CPL",
+      "ip": "",
+      "mac": "",
+      "description": "Liaison CPL",
+      "x": 500,
+      "y": 250
+    },
+    {
+      "id": "ax55",
+      "name": "TP-Link Archer AX55",
+      "type": "Point d’accès",
+      "ip": "192.168.1.170",
+      "mac": "",
+      "description": "Point d’accès Wi-Fi",
+      "x": 720,
+      "y": 250
+    },
+    {
+      "id": "switch",
+      "name": "TP-Link LS1005G",
+      "type": "Switch Gigabit",
+      "ip": "",
+      "mac": "",
+      "description": "Switch réseau",
+      "x": 950,
+      "y": 250
+    },
+    {
+      "id": "pc",
+      "name": "PC principal",
+      "type": "Ethernet",
+      "ip": "192.168.1.183",
+      "mac": "",
+      "description": "Ordinateur principal",
+      "x": 1160,
+      "y": 120
+    },
+    {
+      "id": "x280",
+      "name": "ThinkPad X280",
+      "type": "Ethernet",
+      "ip": "",
+      "mac": "",
+      "description": "PC portable",
+      "x": 1160,
+      "y": 220
+    },
+    {
+      "id": "ps4",
+      "name": "PS4",
+      "type": "Ethernet",
+      "ip": "",
+      "mac": "",
+      "description": "Console",
+      "x": 1160,
+      "y": 320
+    },
+    {
+      "id": "nas",
+      "name": "NAS",
+      "type": "NAS",
+      "ip": "192.168.1.184",
+      "mac": "",
+      "description": "Stockage réseau",
+      "x": 1160,
+      "y": 420
+    }
+  ],
+  "links": [
+    [
+      "freebox",
+      "cpl1"
+    ],
+    [
+      "cpl1",
+      "cpl2"
+    ],
+    [
+      "cpl2",
+      "ax55"
+    ],
+    [
+      "ax55",
+      "switch"
+    ],
+    [
+      "switch",
+      "pc"
+    ],
+    [
+      "switch",
+      "x280"
+    ],
+    [
+      "switch",
+      "ps4"
+    ],
+    [
+      "switch",
+      "nas"
+    ]
+  ]
+}

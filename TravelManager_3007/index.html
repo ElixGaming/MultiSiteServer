@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="description"
+    content="Travel Manager 3007 - gestion complète de voyages"
+  >
+
+  <title>Travel Manager 3007</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div id="toastContainer"></div>
+
+<header class="topbar">
+
+  <div class="brand">
+    <div class="brandIcon">✈️</div>
+
+    <div>
+      <h1>Travel Manager</h1>
+      <span>Service 3007</span>
+    </div>
+  </div>
+
+  <div class="topActions">
+
+    <button
+      id="internetTopButton"
+      class="internetButton"
+      onclick="checkInternet(true)"
+    >
+      🌐 Vérifier vraiment Internet
+    </button>
+
+    <button onclick="toggleTheme()" id="themeButton">
+      🌙
+    </button>
+
+  </div>
+
+</header>
+
+
+<div class="layout">
+
+  <aside class="sidebar">
+
+    <button class="navButton active" data-page="dashboard">
+      🏠 <span>Tableau de bord</span>
+    </button>
+
+    <button class="navButton" data-page="trips">
+      ✈️ <span>Voyages</span>
+    </button>
+
+    <button class="navButton" data-page="countdowns">
+      ⏱️ <span>Compte à rebours</span>
+    </button>
+
+    <button class="navButton" data-page="itinerary">
+      🗓️ <span>Itinéraire</span>
+    </button>
+
+    <button class="navButton" data-page="calendar">
+      📅 <span>Calendrier</span>
+    </button>
+
+    <button class="navButton" data-page="transport">
+      🚆 <span>Transports</span>
+    </button>
+
+    <button class="navButton" data-page="bags">
+      🧳 <span>Bagages</span>
+    </button>
+
+    <button class="navButton" data-page="packing">
+      🎒 <span>Valise / Checklist</span>
+    </button>
+
+    <button class="navButton" data-page="budget">
+      💶 <span>Budget</span>
+    </button>
+
+    <button class="navButton" data-page="bookings">
+      🎟️ <span>Réservations</span>
+    </button>
+
+    <button class="navButton" data-page="documents">
+      📄 <span>Documents</span>
+    </button>
+
+    <button class="navButton" data-page="notes">
+      📝 <span>Notes</span>
+    </button>
+
+    <button class="navButton" data-page="checklists">
+      ✅ <span>Checklists</span>
+    </button>
+
+    <button class="navButton" data-page="internet">
+      🌐 <span>Internet</span>
+    </button>
+
+    <button class="navButton" data-page="tools">
+      🛠️ <span>Outils</span>
+    </button>
+
+  </aside>
+
+
+  <main class="content">
+
+    <!-- DASHBOARD -->
+
+    <section class="page active" id="page-dashboard">
+
+      <div class="pageHeader">
+        <div>
+          <h2>Tableau de bord</h2>
+          <p>Centralise toute la préparation de tes voyages.</p>
+        </div>
+
+        <button class="primary" onclick="openTripModal()">
+          ＋ Nouveau voyage
+        </button>
+      </div>
+
+
+      <div class="dashboardGrid">
+
+        <div class="statCard">
+          <span>✈️</span>
+          <strong id="statTrips">0</strong>
+          <small>Voyages</small>
+        </div>
+
+        <div class="statCard">
+          <span>⏱️</span>
+          <strong id="statCountdowns">0</strong>
+          <small>Compte-à-rebours</small>
+        </div>
+
+        <div class="statCard">
+          <span>🧳</span>
+          <strong id="statBags">0</strong>
+          <small>Bagages</small>
+        </div>
+
+        <div class="statCard">
+          <span>💶</span>
+          <strong id="statBudget">0 €</strong>
+          <small>Dépenses</small>
+        </div>
+
+      </div>
+
+
+      <div class="dashboardGrid">
+
+        <article class="card">
+          <div class="cardHeader">
+            <h3>🌐 État Internet</h3>
+          </div>
+
+          <div id="internetDashboard">
+            <div class="internetState unknown">
+              <span class="statusDot"></span>
+              <strong>Pas encore vérifié</strong>
+            </div>
+
+            <p>
+              Le bouton effectue un vrai test réseau côté serveur.
+            </p>
+
+            <button
+              class="primary"
+              onclick="checkInternet(true)"
+            >
+              🌐 Vérifier vraiment Internet
+            </button>
+          </div>
+        </article>
+
+
+        <article class="card">
+          <div class="cardHeader">
+            <h3>⏱️ Prochain départ</h3>
+          </div>
+
+          <div id="nextCountdown">
+            Aucun compte à rebours.
+          </div>
+        </article>
+
+      </div>
+
+
+      <div class="card">
+        <div class="cardHeader">
+          <h3>✈️ Mes prochains voyages</h3>
+
+          <button onclick="showPage('trips')">
+            Voir tout
+          </button>
+        </div>
+
+        <div id="dashboardTrips" class="cardsGrid"></div>
+      </div>
+
+    </section>
+
+
+    <!-- TRIPS -->
+
+    <section class="page" id="page-trips">
+
+      <div class="pageHeader">
+        <div>
+          <h2>Mes voyages</h2>
+          <p>Crée et organise tous tes voyages.</p>
+        </div>
+
+        <button class="primary" onclick="openTripModal()">
+          ＋ Nouveau voyage
+        </button>
+      </div>
+
+      <div id="tripList" class="cardsGrid"></div>
+
+    </section>
+
+
+    <!-- COUNTDOWNS -->
+
+    <section class="page" id="page-countdowns">
+
+      <div class="pageHeader">
+        <div>
+          <h2>Compte à rebours</h2>
+          <p>
+            Les compteurs sont indépendants des dates des voyages.
+          </p>
+        </div>
+
+        <button class="primary" onclick="openCountdownModal()">
+          ＋ Nouveau compteur
+        </button>
+      </div>
+
+      <div id="countdownList" class="cardsGrid"></div>
+
+    </section>
+
+
+    <!-- ITINERARY -->
+
+    <section class="page" id="page-itinerary">
+
+      <div class="pageHeader">
+        <div>
+          <h2>Itinéraire</h2>
+          <p>Planifie les étapes et activités de tes voyages.</p>
+        </div>
+
+        <button class="primary" onclick="openActivityModal()">
+          ＋ Ajouter une activité
+        </button>
+      </div>
+
+      <div class="filters">
+        <select id="activityTripFilter" onchange="renderActivities()">
+          <option value="">Tous les voyages</option>
+        </select>
+      </div>
+
+      <div id="activityList" class="timeline"></div>
+
+    </section>
+
+
+    <!-- CALENDAR -->
+
+    <section class="page" id="page-calendar">
+
+      <div class="pageHeader">
+        <div>
+          <h2>Calendrier</h2>
+          <p>Vue globale des événements et voyages.</p>
+        </div>
+
+        <button class="primary" onclick="openEventModal()">
+          ＋ Événement
+        </button>
+      </div>
+
+      <div class="calendarControls">
+
+        <button onclick="changeMonth(-1)">‹</button>
+
+        <h3 id="calendarTitle"></h3>
+
+        <button onclick="changeMonth(1)">›</button>
+
+      </div>
+
+      <div id="calendar" class="calendar"></div>
+
+    </section>
+
+
+    <!-- TRANSPORT -->
+
+    <section class="page" id="page-transport">
+
+      <div class="pageHeader">
+        <div>
+          <h2>Transports</h2>
+          <p>
+            Vols, trains, bus, voiture et autres trajets.
+          </p>
+        </div>
+
+        <button class="primary" onclick="openTransportModal()">
+          ＋ Nouveau trajet
+        </button>
+      </div>
+
+      <div id="transportList" class="cardsGrid"></div>
+
+    </section>
+
+
+    <!-- BAGS -->
+
+    <section class="page" id="page-bags">
+
+      <div class="pageHeader">
+        <div>
+          <h2>Gestionnaire de bagages</h2>
+          <p>
+            Soute, valise, cabine, sac personnel et matériel.
+          </p>
+        </div>
+
+        <button class="primary" onclick="openBagModal()">
+          ＋ Nouveau bagage
+        </button>
+      </div>
+
+      <div id="bagList" class="cardsGrid"></div>
+
+    </section>
+
+
+    <!-- PACKING -->
+
+    <section class="page" id="page-packing">
+
+      <div class="pageHeader">
+        <div>
+          <h2>Valise & checklist</h2>
+          <p>Prépare tout ce que tu dois emporter.</p>
+        </div>
+
+        <button class="primary" onclick="openPackingModal()">
+          ＋ Ajouter
+        </button>
+      </div>
+
+      <div class="packingToolbar">
+        <button onclick="addPackingTemplate()">
+          📦 Charger une checklist complète
+        </button>
+
+        <button onclick="clearCompletedPacking()">
+          🧹 Supprimer les éléments terminés
+        </button>
+      </div>
+
+      <div id="packingList"></div>
+
+    </section>
+
+
+    <!-- BUDGET -->
+
+    <section class="page" id="page-budget">
+
+      <div class="pageHeader">
+        <div>
+          <h2>Budget</h2>
+          <p>Suivi des dépenses du voyage.</p>
+        </div>
+
+        <button class="primary" onclick="openExpenseModal()">
+          ＋ Dépense
+        </button>
+      </div>
+
+      <div class="budgetSummary">
+
+        <div class="statCard">
+          <span>💰</span>
+          <strong id="budgetTotal">0 €</strong>
+          <small>Total</small>
+        </div>
+
+        <div class="statCard">
+          <span>✈️</span>
+          <strong id="budgetTransport">0 €</strong>
+          <small>Transport</small>
+        </div>
+
+        <div class="statCard">
+          <span>🏨</span>
+          <strong id="budgetHotel">0 €</strong>
+          <small>Hébergement</small>
+        </div>
+
+        <div class="statCard">
+          <span>🍽️</span>
+          <strong id="budgetFood">0 €</strong>
+          <small>Alimentation</small>
+        </div>
+
+      </div>
+
+      <div id="expenseList"></div>
+
+    </section>
+
+
+    <!-- BOOKINGS -->
+
+    <section class="page" id="page-bookings">
+
+      <div class="pageHeader">
+        <div>
+          <h2>Réservations</h2>
+          <p>Centralise les confirmations et réservations.</p>
+        </div>
+
+        <button class="primary" onclick="openBookingModal()">
+          ＋ Réservation
+        </button>
+      </div>
+
+      <div id="bookingList" class="cardsGrid"></div>
+
+    </section>
+
+
+    <!-- DOCUMENTS -->
+
+    <section class="page" id="page-documents">
+
+      <div class="pageHeader">
+        <div>
+          <h2>Documents</h2>
+          <p>
+            Références, numéros, liens et informations importantes.
+          </p>
+        </div>
+
+        <button class="primary" onclick="openDocumentModal()">
+          ＋ Document
+        </button>
+      </div>
+
+      <div id="documentList" class="cardsGrid"></div>
+
+    </section>
+
+
+    <!-- NOTES -->
+
+    <section class="page" id="page-notes">
+
+      <div class="pageHeader">
+        <div>
+          <h2>Notes</h2>
+          <p>Informations libres liées aux voyages.</p>
+        </div>
+
+        <button class="primary" onclick="openNoteModal()">
+          ＋ Note
+        </button>
+      </div>
+
+      <div id="noteList" class="cardsGrid"></div>
+
+    </section>
+
+
+    <!-- CHECKLIST -->
+
+    <section class="page" id="page-checklists">
+
+      <div class="pageHeader">
+        <div>
+          <h2>Checklists</h2>
+          <p>Pré-départ, maison, aéroport et personnalisées.</p>
+        </div>
+
+        <button class="primary" onclick="openChecklistModal()">
+          ＋ Checklist
+        </button>
+      </div>
+
+      <div class="packingToolbar">
+
+        <button onclick="addChecklistTemplate('airport')">
+          ✈️ Checklist aéroport
+        </button>
+
+        <button onclick="addChecklistTemplate('home')">
+          🏠 Checklist maison
+        </button>
+
+        <button onclick="addChecklistTemplate('departure')">
+          🧳 Checklist départ
+        </button>
+
+      </div>
+
+      <div id="checklistList"></div>
+
+    </section>
+
+
+    <!-- INTERNET -->
+
+    <section class="page" id="page-internet">
+
+      <div class="pageHeader">
+        <div>
+          <h2>Internet & services en ligne</h2>
+          <p>
+            Vérification réseau et outils nécessitant Internet.
+          </p>
+        </div>
+      </div>
+
+
+      <div class="internetHero">
+
+        <div id="internetBigState">
+          <span class="bigInternetIcon">🌐</span>
+
+          <h3>Internet non vérifié</h3>
+
+          <p>
+            Travel Manager va réellement contacter Internet
+            depuis le serveur.
+          </p>
+        </div>
+
+        <button
+          class="primary bigButton"
+          onclick="checkInternet(true)"
+        >
+          🌐 VÉRIFIER VRAIMENT INTERNET
+        </button>
+
+      </div>
+
+
+      <div id="internetTests" class="cardsGrid"></div>
+
+
+      <div class="onlineTools">
+
+        <article class="card onlineTool">
+          <h3>🌤️ Météo</h3>
+
+          <p>
+            Recherche la météo d'une destination.
+          </p>
+
+          <div class="formGrid">
+
+            <input
+              id="weatherPlace"
+              placeholder="Paris, Tokyo, New York..."
+            >
+
+            <button
+              class="primary"
+              onclick="searchWeather()"
+            >
+              Rechercher
+            </button>
+
+          </div>
+
+          <div id="weatherResult"></div>
+        </article>
+
+
+        <article class="card onlineTool">
+
+          <h3>🗺️ Destination</h3>
+
+          <p>
+            Recherche une destination avec OpenStreetMap.
+          </p>
+
+          <div class="formGrid">
+
+            <input
+              id="mapPlace"
+              placeholder="Aéroport Charles de Gaulle"
+            >
+
+            <button
+              class="primary"
+              onclick="searchPlace()"
+            >
+              Rechercher
+            </button>
+
+          </div>
+
+          <div id="mapResult"></div>
+
+        </article>
+
+      </div>
+
+    </section>
+
+
+    <!-- TOOLS -->
+
+    <section class="page" id="page-tools">
+
+      <div class="pageHeader">
+        <div>
+          <h2>Outils</h2>
+          <p>Import, export, sauvegarde et maintenance.</p>
+        </div>
+      </div>
+
+      <div class="toolsGrid">
+
+        <button onclick="exportJSON()">
+          📤 Exporter les données JSON
+        </button>
+
+        <button onclick="document.getElementById('importFile').click()">
+          📥 Importer JSON
+        </button>
+
+        <button onclick="exportCSV()">
+          📊 Exporter CSV
+        </button>
+
+        <button onclick="printPage()">
+          🖨️ Imprimer / PDF
+        </button>
+
+        <button onclick="exportICS()">
+          📅 Exporter calendrier ICS
+        </button>
+
+        <button onclick="duplicateCurrentTrip()">
+          📑 Dupliquer un voyage
+        </button>
+
+        <button onclick="resetDemoData()">
+          🔄 Restaurer les données de démonstration
+        </button>
+
+        <button class="danger" onclick="resetEverything()">
+          🗑️ Tout supprimer
+        </button>
+
+      </div>
+
+      <input
+        type="file"
+        id="importFile"
+        accept=".json,application/json"
+        hidden
+      >
+
+      <div class="card serverInfo">
+        <h3>🖥️ Serveur Travel Manager</h3>
+
+        <div id="serverInfo">
+          Chargement...
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+</div>
+
+
+<!-- MODAL -->
+
+<div id="modal" class="modal hidden">
+
+  <div class="modalOverlay" onclick="closeModal()"></div>
+
+  <div class="modalBox">
+
+    <div class="modalHeader">
+
+      <h2 id="modalTitle">Nouvel élément</h2>
+
+      <button onclick="closeModal()">×</button>
+
+    </div>
+
+    <div id="modalContent"></div>
+
+  </div>
+
+</div>
+
+
+<script src="app.js"></script>
+
+</body>
+</html>

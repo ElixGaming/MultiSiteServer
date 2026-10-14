@@ -1,0 +1,1 @@
+{"name":"mini-hosting-3006","version":"1.0.0","type":"module","scripts":{"start":"node server.mjs"},"dependencies":{"express":"^5.1.0","better-sqlite3":"^12.4.1"},"allowScripts":{"better-sqlite3@12.11.1":true}}

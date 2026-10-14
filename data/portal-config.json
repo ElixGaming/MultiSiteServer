@@ -1,0 +1,114 @@
+{
+  "services": [
+    {
+      "id": "acc50324-f2fb-4464-8e69-f830bfcc7099",
+      "name": "AX55",
+      "url": "http://192.168.1.170",
+      "category": "Outil"
+    },
+    {
+      "id": "efece078-8fce-47ae-be39-bdee0a7d099d",
+      "name": "nPerf",
+      "url": "https://nperf.com",
+      "category": "Outil"
+    },
+    {
+      "id": "b4da5d7f-e81f-476d-b20a-47e00be1dcb7",
+      "name": "SpeedTest by Ookla",
+      "url": "https://speedtest.net",
+      "category": "Outil"
+    },
+    {
+      "id": "b3e76963-6270-4ac4-9d7d-fa359784a6b2",
+      "name": "Coolify",
+      "url": "http://localhost:8000",
+      "category": "Administration"
+    }
+  ],
+  "apps": [
+    {
+      "slot": 1,
+      "name": "MultiSiteServer",
+      "url": "http://localhost:3000",
+      "description": "Application personnalisée",
+      "configured": true
+    },
+    {
+      "slot": 2,
+      "name": "NetworkTicketCenter",
+      "url": "http://localhost:3001",
+      "description": "Application personnalisée",
+      "configured": true
+    },
+    {
+      "slot": 3,
+      "name": "NetworkMap",
+      "url": "http://localhost:3002",
+      "description": "Application personnalisée",
+      "configured": true
+    },
+    {
+      "slot": 4,
+      "name": "Configuration Studio",
+      "url": "http://localhost:3003",
+      "description": "Application personnalisée",
+      "configured": true
+    },
+    {
+      "slot": 5,
+      "name": "MissionControl",
+      "url": "http://localhost:3004",
+      "description": "Application personnalisée",
+      "configured": true
+    },
+    {
+      "slot": 6,
+      "name": "MiniDatacenter",
+      "url": "http://localhost:3005",
+      "description": "Application personnalisée",
+      "configured": true
+    },
+    {
+      "slot": 7,
+      "name": "MiniHosting",
+      "url": "http://localhost:3006",
+      "description": "Application personnalisée",
+      "configured": true
+    },
+    {
+      "slot": 8,
+      "name": "Travel Manager",
+      "url": "http://localhost:3007",
+      "description": "Application personnalisée",
+      "configured": true
+    },
+    {
+      "slot": 9,
+      "name": "Internet Check",
+      "url": "http://localhost:3008",
+      "description": "Application personnalisée",
+      "configured": true
+    },
+    {
+      "slot": 10,
+      "name": "Emplacement libre",
+      "url": "",
+      "description": "Ajoute ton application ou ton raccourci.",
+      "configured": false
+    },
+    {
+      "slot": 11,
+      "name": "Emplacement libre",
+      "url": "",
+      "description": "Ajoute ton application ou ton raccourci.",
+      "configured": false
+    },
+    {
+      "slot": 12,
+      "name": "Emplacement libre",
+      "url": "",
+      "description": "Ajoute ton application ou ton raccourci.",
+      "configured": false
+    }
+  ]
+}

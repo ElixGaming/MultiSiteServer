@@ -1,0 +1,51 @@
+MULTISITESERVER — CONTROL CENTER v2.0
+=====================================
+
+CONTENU
+- portail.html : interface du tableau de bord
+- style.css    : thème sombre responsive
+- app.js       : cartes, boutons, édition et actualisation automatique
+- server.mjs   : serveur Node.js et API
+- data/        : créé automatiquement, contient la configuration sauvegardée
+
+INSTALLATION (Windows)
+1. Arrête l'ancien serveur du portail avec Ctrl+C dans sa fenêtre de terminal.
+2. Fais une copie de sauvegarde de ton dossier C:\MultiSiteServer.
+3. Copie portail.html, style.css, app.js et server.mjs à la racine de C:\MultiSiteServer.
+   Remplace les anciens fichiers du même nom. Ne supprime pas tes dossiers de services.
+4. Ouvre un terminal dans C:\MultiSiteServer et lance :
+      node server.mjs
+5. Ouvre http://localhost:3000
+
+PRÉREQUIS
+- Node.js récent avec prise en charge de fetch (Node 18+ recommandé).
+- Aucune dépendance npm à installer.
+
+SERVICES PAR DÉFAUT
+- MultiSiteServer : http://localhost:3000
+- NetworkTicketCenter : http://localhost:3001
+- Service 3002 : http://localhost:3002 (modifie le nom si ton application sur ce port a un autre nom)
+
+Les boutons « Modifier » permettent de changer le nom, l'URL et la catégorie.
+« Ajouter un service » permet d'ajouter d'autres raccourcis (maximum 30).
+Les 12 emplacements sont configurables et enregistrés dans data/portal-config.json.
+
+STATISTIQUES
+- CPU : estimation basée sur les temps CPU fournis par le système.
+- RAM : calculée à partir de la mémoire totale et disponible.
+- Stockage : volume système, récupéré via PowerShell sur Windows ou df sur Linux/macOS.
+- Disponibilité : temps de fonctionnement du système.
+Ces données concernent la machine qui exécute node server.mjs.
+
+ACCÈS RÉSEAU
+Le serveur écoute par défaut sur 0.0.0.0:3000 afin d'être accessible depuis le réseau local.
+Sur ce PC : http://localhost:3000
+Depuis un autre appareil : http://ADRESSE-IP-DU-PC:3000
+N'ouvre pas ce port sur Internet et utilise ce portail uniquement sur un réseau de confiance.
+Si le port 3000 est déjà utilisé, arrête l'ancien portail avant de lancer cette version.
+
+DÉPANNAGE
+- « EADDRINUSE » : un autre programme utilise le port 3000. Arrête l'ancien serveur.
+- Service affiché hors ligne : vérifie son URL et que son propre serveur tourne.
+- Pour vérifier l'API : ouvre http://localhost:3000/api/health
+- La configuration des services et applications est conservée dans data/portal-config.json.

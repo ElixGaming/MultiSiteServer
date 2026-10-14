@@ -1,0 +1,1402 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>Network Ticket Center</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: #080c12;
+    color: #e8edf4;
+    font-family:
+        Inter,
+        Segoe UI,
+        Arial,
+        sans-serif;
+}
+
+header {
+    height: 70px;
+    padding: 0 30px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    background: #101620;
+    border-bottom: 1px solid #202a37;
+}
+
+.logo {
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.logo span {
+    color: #5e9cff;
+}
+
+nav a {
+    color: #9aa7b7;
+    text-decoration: none;
+    margin-left: 25px;
+}
+
+nav a:hover {
+    color: white;
+}
+
+.container {
+    max-width: 1250px;
+    margin: auto;
+    padding: 30px 20px;
+}
+
+h1 {
+    margin-bottom: 5px;
+}
+
+.subtitle {
+    color: #758294;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 430px 1fr;
+    gap: 20px;
+}
+
+.card {
+    background: #101620;
+    border: 1px solid #202a37;
+    border-radius: 14px;
+    padding: 22px;
+}
+
+.card h2 {
+    margin-top: 0;
+}
+
+label {
+    display: block;
+    color: #8f9baa;
+    font-size: 13px;
+    margin: 15px 0 7px;
+}
+
+input,
+select,
+textarea {
+
+    width: 100%;
+
+    padding: 11px;
+
+    border-radius: 8px;
+
+    border: 1px solid #2b3746;
+
+    background: #090e15;
+
+    color: white;
+
+    outline: none;
+
+    font-family: inherit;
+}
+
+textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: #5e9cff;
+}
+
+button {
+    border: 0;
+    border-radius: 8px;
+    padding: 10px 14px;
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+button:hover {
+    filter: brightness(1.15);
+}
+
+.primary {
+    background: #3479df;
+}
+
+.secondary {
+    background: #273241;
+}
+
+.success {
+    background: #247348;
+}
+
+.warning {
+    background: #856327;
+}
+
+.danger {
+    background: #923d45;
+}
+
+.full {
+    width: 100%;
+    margin-top: 18px;
+}
+
+.reason-builder {
+    margin-top: 15px;
+    padding: 15px;
+    border: 1px solid #273241;
+    border-radius: 10px;
+    background: #0b1118;
+}
+
+.row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.preview {
+    min-height: 300px;
+
+    padding: 18px;
+
+    border-radius: 10px;
+
+    background: #070b10;
+
+    border: 1px solid #273241;
+
+    white-space: pre-wrap;
+
+    font-family: Consolas, monospace;
+
+    font-size: 13px;
+
+    color: #d9e3ed;
+}
+
+.ticket {
+    margin-top: 12px;
+    padding: 15px;
+
+    background: #0b1118;
+
+    border: 1px solid #293544;
+
+    border-radius: 10px;
+}
+
+.ticket-top {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.ticket-number {
+    color: #70a7ff;
+    font-family: Consolas, monospace;
+    font-weight: 700;
+}
+
+.badge {
+    padding: 5px 9px;
+    border-radius: 20px;
+    font-size: 10px;
+    font-weight: 800;
+}
+
+.open {
+    background: #594318;
+    color: #ffc95c;
+}
+
+.testing {
+    background: #183c5f;
+    color: #72b8ff;
+}
+
+.persist {
+    background: #5a2528;
+    color: #ff9292;
+}
+
+.closed {
+    background: #16482f;
+    color: #65d79b;
+}
+
+.ticket-info {
+    color: #8592a1;
+    font-size: 13px;
+    margin: 10px 0;
+}
+
+.actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+}
+
+.empty {
+    color: #667384;
+    text-align: center;
+    padding: 35px;
+}
+
+.device-select-info {
+    margin-top: 7px;
+    color: #657384;
+    font-size: 12px;
+}
+
+@media(max-width: 900px) {
+
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+    <div class="logo">
+        NETWORK <span>TICKET CENTER</span>
+    </div>
+
+    <nav>
+        <a href="/">Tickets</a>
+        <a href="/dashboard.html">Dashboard</a>
+	<a href="http://192.168.1.183:3000">Portail</a>
+    </nav>
+
+</header>
+
+
+<div class="container">
+
+    <h1>🎫 Ticket Center</h1>
+
+    <p class="subtitle">
+        Création et gestion des incidents réseau
+    </p>
+
+
+    <div class="grid">
+
+
+        <!-- CREATION -->
+
+        <div class="card">
+
+            <h2>Créer un ticket</h2>
+
+
+            <label>Appareil</label>
+
+            <select id="device">
+            </select>
+
+            <div id="deviceInfo"
+                 class="device-select-info">
+            </div>
+
+
+            <label>Nom</label>
+
+            <input
+                id="name"
+                value="Elyes Elleuch"
+            >
+
+
+            <label>Position</label>
+
+            <input
+                id="position"
+                placeholder="Ex : Chambre"
+            >
+
+
+            <label>Ping @</label>
+
+            <input
+                id="pingMention"
+                placeholder="@Papa"
+            >
+
+
+            <label>Raison</label>
+
+            <textarea
+                id="reason"
+                placeholder="Décris le problème..."
+            ></textarea>
+
+
+            <div class="reason-builder">
+
+                <strong>
+                    Reason Builder
+                </strong>
+
+
+                <label>Type</label>
+
+                <select
+                    id="reasonType"
+                    onchange="updateReasonFields()"
+                >
+
+                    <option value="">
+                        -- Choisir --
+                    </option>
+
+                    <option value="notResponding">
+                        Not Responding
+                    </option>
+
+                    <option value="performance">
+                        Performance
+                    </option>
+
+                    <option value="highPing">
+                        High Ping
+                    </option>
+
+                    <option value="unstable">
+                        Connection Unstable
+                    </option>
+
+                    <option value="packetLoss">
+                        Packet Loss
+                    </option>
+
+                    <option value="wifi">
+                        Wi-Fi Disconnects
+                    </option>
+
+                    <option value="dns">
+                        DNS Error
+                    </option>
+
+                    <option value="internet">
+                        No Internet
+                    </option>
+
+                    <option value="custom">
+                        Custom
+                    </option>
+
+                </select>
+
+
+                <div id="dynamicFields"></div>
+
+
+                <button
+                    class="secondary full"
+                    onclick="generateReason()"
+                >
+                    Générer la raison
+                </button>
+
+            </div>
+
+
+            <button
+                class="primary full"
+                onclick="createTicket()"
+            >
+                ⚡ CREATE TICKET
+            </button>
+
+        </div>
+
+
+        <!-- PREVIEW -->
+
+        <div class="card">
+
+            <h2>Prévisualisation</h2>
+
+            <div
+                id="preview"
+                class="preview"
+            >
+Aucun ticket sélectionné.
+            </div>
+
+
+            <button
+                class="secondary full"
+                onclick="copyPreview()"
+            >
+                📋 Copier pour WhatsApp
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- TICKETS -->
+
+    <div
+        class="card"
+        style="margin-top:20px;"
+    >
+
+        <h2>
+            Tickets
+        </h2>
+
+        <div id="ticketList">
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+let state = {
+    devices: [],
+    tickets: []
+};
+
+let selectedTicket = null;
+
+
+/* --------------------------------
+   API
+-------------------------------- */
+
+async function getState() {
+
+    const response =
+        await fetch("/api/state");
+
+    state =
+        await response.json();
+
+    render();
+}
+
+
+async function api(url, options = {}) {
+
+    const response =
+        await fetch(
+            url,
+            {
+                ...options,
+                headers: {
+                    "Content-Type":
+                        "application/json",
+                    ...(options.headers || {})
+                }
+            }
+        );
+
+    const result =
+        await response.json();
+
+    if (!response.ok) {
+        throw new Error(
+            result.error ||
+            "Erreur serveur"
+        );
+    }
+
+    return result;
+}
+
+
+/* --------------------------------
+   DEVICE SELECT
+-------------------------------- */
+
+function renderDeviceSelect() {
+
+    const select =
+        document.getElementById("device");
+
+    const current =
+        select.value;
+
+    select.innerHTML = "";
+
+    state.devices.forEach(device => {
+
+        const option =
+            document.createElement("option");
+
+        option.value =
+            device.id;
+
+        option.textContent =
+            `${device.name} — ${device.ip}`;
+
+        select.appendChild(option);
+
+    });
+
+    if (current) {
+        select.value = current;
+    }
+
+    updateDeviceInfo();
+}
+
+
+function updateDeviceInfo() {
+
+    const device =
+        state.devices.find(
+            d =>
+                d.id ===
+                document.getElementById("device").value
+        );
+
+    const info =
+        document.getElementById("deviceInfo");
+
+    if (!device) {
+        info.textContent =
+            "Aucun appareil configuré.";
+        return;
+    }
+
+    info.textContent =
+        `${device.model} • ${device.ssid} • ${device.mac}`;
+
+}
+
+
+/* --------------------------------
+   REASON
+-------------------------------- */
+
+function updateReasonFields() {
+
+    const type =
+        document.getElementById("reasonType").value;
+
+    const container =
+        document.getElementById("dynamicFields");
+
+    container.innerHTML = "";
+
+
+    if (type === "performance") {
+
+        container.innerHTML = `
+
+            <div class="row">
+
+                <div>
+
+                    <label>
+                        Download Mbps
+                    </label>
+
+                    <input
+                        id="download"
+                        type="number"
+                    >
+
+                </div>
+
+                <div>
+
+                    <label>
+                        Upload Mbps
+                    </label>
+
+                    <input
+                        id="upload"
+                        type="number"
+                    >
+
+                </div>
+
+            </div>
+
+            <label>
+                Ping ms
+            </label>
+
+            <input
+                id="ping"
+                type="number"
+            >
+        `;
+    }
+
+
+    if (
+        type === "highPing" ||
+        type === "unstable"
+    ) {
+
+        container.innerHTML = `
+
+            <label>
+                Ping ms
+            </label>
+
+            <input
+                id="ping"
+                type="number"
+            >
+
+        `;
+    }
+
+
+    if (type === "packetLoss") {
+
+        container.innerHTML = `
+
+            <label>
+                Packet Loss %
+            </label>
+
+            <input
+                id="loss"
+                type="number"
+            >
+
+        `;
+    }
+
+
+    if (type === "custom") {
+
+        container.innerHTML = `
+
+            <label>
+                Description
+            </label>
+
+            <input
+                id="customReason"
+            >
+
+        `;
+    }
+
+}
+
+
+function generateReason() {
+
+    const type =
+        document.getElementById("reasonType").value;
+
+    let text = "";
+
+
+    switch(type) {
+
+        case "notResponding":
+
+            text =
+                "Not Responding";
+
+            break;
+
+
+        case "performance":
+
+            text =
+                `Performance was ↓ ${
+                    document.getElementById("download")?.value || "?"
+                } Mbps ↑ ${
+                    document.getElementById("upload")?.value || "?"
+                } Mbps Ping: ${
+                    document.getElementById("ping")?.value || "?"
+                } ms`;
+
+            break;
+
+
+        case "highPing":
+
+            text =
+                `High Ping — ${
+                    document.getElementById("ping")?.value || "?"
+                } ms`;
+
+            break;
+
+
+        case "unstable":
+
+            text =
+                `Connection Unstable — Ping: ${
+                    document.getElementById("ping")?.value || "?"
+                } ms`;
+
+            break;
+
+
+        case "packetLoss":
+
+            text =
+                `Packet Loss — ${
+                    document.getElementById("loss")?.value || "?"
+                }%`;
+
+            break;
+
+
+        case "wifi":
+
+            text =
+                "Wi-Fi Disconnects";
+
+            break;
+
+
+        case "dns":
+
+            text =
+                "DNS Error";
+
+            break;
+
+
+        case "internet":
+
+            text =
+                "No Internet";
+
+            break;
+
+
+        case "custom":
+
+            text =
+                document.getElementById(
+                    "customReason"
+                )?.value || "";
+
+            break;
+
+    }
+
+
+    document.getElementById(
+        "reason"
+    ).value = text;
+
+}
+
+
+/* --------------------------------
+   CREATE
+-------------------------------- */
+
+async function createTicket() {
+
+    const deviceId =
+        document.getElementById("device").value;
+
+    const device =
+        state.devices.find(
+            d => d.id === deviceId
+        );
+
+    if (!device) {
+
+        alert(
+            "Crée d'abord un appareil dans le dashboard."
+        );
+
+        return;
+    }
+
+
+    const payload = {
+
+        deviceId,
+
+        name:
+            document.getElementById(
+                "name"
+            ).value,
+
+        position:
+            document.getElementById(
+                "position"
+            ).value,
+
+        pingMention:
+            document.getElementById(
+                "pingMention"
+            ).value,
+
+        reason:
+            document.getElementById(
+                "reason"
+            ).value
+
+    };
+
+
+    try {
+
+        const ticket =
+            await api(
+                "/api/tickets",
+                {
+                    method: "POST",
+                    body:
+                        JSON.stringify(payload)
+                }
+            );
+
+        selectedTicket =
+            ticket.number;
+
+        showTicket(ticket);
+
+        alert(
+            `Ticket #${ticket.number} créé.`
+        );
+
+    } catch(error) {
+
+        alert(error.message);
+
+    }
+
+}
+
+
+/* --------------------------------
+   TEXT
+-------------------------------- */
+
+function buildTicketText(ticket) {
+
+    return `🎫 NETWORK TICKET #${ticket.number}
+
+From: ${ticket.name}
+Position: ${ticket.position}
+
+Device: ${ticket.deviceName}
+Model: ${ticket.model}
+SSID: ${ticket.ssid}
+IP: ${ticket.ip}
+MAC: ${ticket.mac}
+
+Reason: ${ticket.reason}
+Ping: ${ticket.pingMention || "N/A"}
+
+Created: ${formatDate(ticket.created)}
+Status: ${ticket.status}`;
+
+}
+
+
+function showTicket(ticket) {
+
+    selectedTicket =
+        ticket.number;
+
+    let text =
+        buildTicketText(ticket);
+
+
+    if (ticket.status === "TESTING") {
+
+        text =
+`🎫 NETWORK TICKET #${ticket.number}
+
+Status passed to testing`;
+
+    }
+
+
+    if (ticket.status === "PERSIST") {
+
+        text =
+`🎫 NETWORK TICKET #${ticket.number}
+
+Status: PERSIST
+
+New Performance:
+↓ ${ticket.newDownload || "?"} Mbps ↑ ${ticket.newUpload || "?"} Mbps
+Ping: ${ticket.newPing || "?"} ms
+
+Note:
+${ticket.note || ""}`;
+
+    }
+
+
+    if (ticket.status === "CLOSED") {
+
+        text =
+`🎫 NETWORK TICKET #${ticket.number}
+
+Status: CLOSED`;
+
+    }
+
+
+    document.getElementById(
+        "preview"
+    ).textContent = text;
+
+}
+
+
+/* --------------------------------
+   TICKETS
+-------------------------------- */
+
+function renderTickets() {
+
+    const container =
+        document.getElementById(
+            "ticketList"
+        );
+
+    if (state.tickets.length === 0) {
+
+        container.innerHTML =
+            `<div class="empty">
+                Aucun ticket.
+             </div>`;
+
+        return;
+    }
+
+
+    container.innerHTML = "";
+
+
+    state.tickets.forEach(ticket => {
+
+        const div =
+            document.createElement("div");
+
+        div.className =
+            "ticket";
+
+
+        div.innerHTML = `
+
+            <div class="ticket-top">
+
+                <div class="ticket-number">
+                    #${ticket.number}
+                </div>
+
+                <div class="badge ${ticket.status.toLowerCase()}">
+                    ${ticket.status}
+                </div>
+
+            </div>
+
+
+            <div class="ticket-info">
+
+                <strong>
+                    ${escapeHtml(ticket.deviceName)}
+                </strong>
+
+                <br>
+
+                ${escapeHtml(ticket.reason)}
+
+                <br>
+
+                IP:
+                ${escapeHtml(ticket.ip)}
+
+                <br>
+
+                ${formatDate(ticket.created)}
+
+            </div>
+
+
+            <div class="actions">
+
+                <button
+                    class="secondary"
+                    onclick="openTicket('${ticket.number}')"
+                >
+                    👁 Détails
+                </button>
+
+
+                ${
+                    ticket.status === "OPEN"
+
+                    ?
+
+                    `<button
+                        class="secondary"
+                        onclick="changeStatus('${ticket.number}', 'TESTING')"
+                    >
+                        🧪 TESTING
+                    </button>`
+
+                    : ""
+                }
+
+
+                ${
+                    ticket.status !== "CLOSED"
+
+                    ?
+
+                    `<button
+                        class="warning"
+                        onclick="persistTicket('${ticket.number}')"
+                    >
+                        ⚠ PERSIST
+                    </button>`
+
+                    : ""
+                }
+
+
+                ${
+                    ticket.status !== "CLOSED"
+
+                    ?
+
+                    `<button
+                        class="success"
+                        onclick="changeStatus('${ticket.number}', 'CLOSED')"
+                    >
+                        ✓ CLOSE
+                    </button>`
+
+                    : ""
+                }
+
+
+                ${
+                    ticket.status === "CLOSED"
+
+                    ?
+
+                    `<button
+                        class="secondary"
+                        onclick="changeStatus('${ticket.number}', 'OPEN')"
+                    >
+                        ↻ REOPEN
+                    </button>`
+
+                    : ""
+                }
+
+            </div>
+
+        `;
+
+        container.appendChild(div);
+
+    });
+
+}
+
+
+/* --------------------------------
+   STATUS
+-------------------------------- */
+
+async function changeStatus(
+    number,
+    status
+) {
+
+    try {
+
+        const ticket =
+            await api(
+                `/api/tickets/${number}/status`,
+                {
+                    method: "PATCH",
+                    body:
+                        JSON.stringify({
+                            status
+                        })
+                }
+            );
+
+        showTicket(ticket);
+
+    } catch(error) {
+
+        alert(error.message);
+
+    }
+
+}
+
+
+/* --------------------------------
+   PERSIST
+-------------------------------- */
+
+async function persistTicket(number) {
+
+    const download =
+        prompt(
+            "Nouveau Download (Mbps) :"
+        );
+
+    if (download === null)
+        return;
+
+
+    const upload =
+        prompt(
+            "Nouveau Upload (Mbps) :"
+        );
+
+    if (upload === null)
+        return;
+
+
+    const ping =
+        prompt(
+            "Nouveau Ping (ms) :"
+        );
+
+    if (ping === null)
+        return;
+
+
+    const note =
+        prompt(
+            "Note :"
+        );
+
+    if (note === null)
+        return;
+
+
+    try {
+
+        const ticket =
+            await api(
+                `/api/tickets/${number}/status`,
+                {
+                    method: "PATCH",
+
+                    body:
+                        JSON.stringify({
+
+                            status: "PERSIST",
+
+                            newDownload:
+                                download,
+
+                            newUpload:
+                                upload,
+
+                            newPing:
+                                ping,
+
+                            note
+
+                        })
+                }
+            );
+
+        showTicket(ticket);
+
+    } catch(error) {
+
+        alert(error.message);
+
+    }
+
+}
+
+
+/* --------------------------------
+   OPEN
+-------------------------------- */
+
+function openTicket(number) {
+
+    const ticket =
+        state.tickets.find(
+            t => t.number === number
+        );
+
+    if (ticket) {
+        showTicket(ticket);
+    }
+
+}
+
+
+/* --------------------------------
+   COPY
+-------------------------------- */
+
+async function copyPreview() {
+
+    const text =
+        document.getElementById(
+            "preview"
+        ).textContent;
+
+    try {
+
+        await navigator.clipboard.writeText(
+            text
+        );
+
+        alert(
+            "Copié pour WhatsApp."
+        );
+
+    } catch {
+
+        alert(
+            "Impossible de copier."
+        );
+
+    }
+
+}
+
+
+/* --------------------------------
+   HELPERS
+-------------------------------- */
+
+function formatDate(value) {
+
+    return new Date(value)
+        .toLocaleString(
+            "fr-FR"
+        );
+
+}
+
+
+function escapeHtml(text) {
+
+    return String(text)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+
+}
+
+
+/* --------------------------------
+   RENDER
+-------------------------------- */
+
+function render() {
+
+    renderDeviceSelect();
+    renderTickets();
+
+}
+
+
+/* --------------------------------
+   REAL TIME
+-------------------------------- */
+
+const events =
+    new EventSource(
+        "/api/events"
+    );
+
+events.addEventListener(
+    "state",
+    event => {
+
+        const message =
+            JSON.parse(
+                event.data
+            );
+
+        state =
+            message.data;
+
+        render();
+
+
+        if (selectedTicket) {
+
+            const ticket =
+                state.tickets.find(
+                    t =>
+                        t.number ===
+                        selectedTicket
+                );
+
+            if (ticket) {
+                showTicket(ticket);
+            }
+
+        }
+
+    }
+);
+
+
+document
+    .getElementById("device")
+    .addEventListener(
+        "change",
+        updateDeviceInfo
+    );
+
+
+getState();
+
+</script>
+
+</body>
+</html>

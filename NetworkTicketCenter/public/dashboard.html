@@ -1,0 +1,1641 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>Network Dashboard</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+
+    margin: 0;
+
+    background: #080c12;
+
+    color: #e8edf4;
+
+    font-family:
+        Inter,
+        Segoe UI,
+        Arial,
+        sans-serif;
+}
+
+header {
+
+    height: 70px;
+
+    padding: 0 30px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    background: #101620;
+
+    border-bottom:
+        1px solid #202a37;
+
+}
+
+.logo {
+
+    font-size: 20px;
+
+    font-weight: 800;
+
+}
+
+.logo span {
+
+    color: #5e9cff;
+
+}
+
+nav a {
+
+    color: #9aa7b7;
+
+    text-decoration: none;
+
+    margin-left: 25px;
+
+}
+
+nav a:hover {
+
+    color: white;
+
+}
+
+.container {
+
+    max-width: 1350px;
+
+    margin: auto;
+
+    padding: 30px 20px;
+
+}
+
+.subtitle {
+
+    color: #758294;
+
+}
+
+
+/* STATS */
+
+.stats {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 15px;
+
+    margin: 28px 0;
+
+}
+
+.stat {
+
+    background: #101620;
+
+    border:
+        1px solid #202a37;
+
+    border-radius: 14px;
+
+    padding: 21px;
+
+}
+
+.stat-title {
+
+    color: #7f8c9c;
+
+    font-size: 12px;
+
+}
+
+.stat-number {
+
+    font-size: 30px;
+
+    font-weight: 800;
+
+    margin-top: 7px;
+
+}
+
+.green {
+    color: #5bd693;
+}
+
+.red {
+    color: #ff7777;
+}
+
+.blue {
+    color: #6da7ff;
+}
+
+
+/* DEVICE GRID */
+
+.devices {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 18px;
+
+}
+
+.device {
+
+    background: #101620;
+
+    border:
+        1px solid #202a37;
+
+    border-radius: 14px;
+
+    padding: 21px;
+
+}
+
+.device.problem {
+
+    border-color:
+        #77383c;
+
+}
+
+.device-header {
+
+    display: flex;
+
+    justify-content:
+        space-between;
+
+    align-items:
+        center;
+
+    gap: 10px;
+
+}
+
+.device-name {
+
+    font-size: 19px;
+
+    font-weight: 800;
+
+}
+
+.badge {
+
+    padding:
+        6px 10px;
+
+    border-radius:
+        20px;
+
+    font-size:
+        10px;
+
+    font-weight:
+        800;
+
+}
+
+.operational {
+
+    background:
+        #16482f;
+
+    color:
+        #65d79b;
+
+}
+
+.problem-badge {
+
+    background:
+        #542527;
+
+    color:
+        #ff8888;
+
+}
+
+.info {
+
+    margin-top:
+        18px;
+
+}
+
+.row {
+
+    display: flex;
+
+    justify-content:
+        space-between;
+
+    gap: 15px;
+
+    padding:
+        9px 0;
+
+    border-bottom:
+        1px solid #202a37;
+
+}
+
+.label {
+
+    color:
+        #718092;
+
+}
+
+.value {
+
+    color:
+        #dfe7ef;
+
+    font-family:
+        Consolas,
+        monospace;
+
+    text-align:
+        right;
+
+}
+
+.ticket {
+
+    margin-top:
+        15px;
+
+    padding:
+        14px;
+
+    background:
+        #0a1017;
+
+    border:
+        1px solid #293544;
+
+    border-radius:
+        9px;
+
+}
+
+.ticket-number {
+
+    color:
+        #6da7ff;
+
+    font-family:
+        Consolas,
+        monospace;
+
+    font-weight:
+        800;
+
+}
+
+.reason {
+
+    color:
+        #8491a1;
+
+    font-size:
+        12px;
+
+    margin-top:
+        5px;
+
+}
+
+button {
+
+    margin-top:
+        14px;
+
+    border:
+        0;
+
+    border-radius:
+        8px;
+
+    padding:
+        10px 14px;
+
+    background:
+        #273241;
+
+    color:
+        white;
+
+    font-weight:
+        700;
+
+    cursor:
+        pointer;
+
+}
+
+button:hover {
+
+    filter:
+        brightness(1.15);
+
+}
+
+
+/* ADD DEVICE */
+
+.add-card {
+
+    margin-top:
+        22px;
+
+}
+
+.form-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap:
+        12px;
+
+}
+
+label {
+
+    display: block;
+
+    color:
+        #8c99a8;
+
+    font-size:
+        12px;
+
+    margin-bottom:
+        6px;
+
+}
+
+input {
+
+    width:
+        100%;
+
+    padding:
+        11px;
+
+    background:
+        #090e15;
+
+    color:
+        white;
+
+    border:
+        1px solid #2b3746;
+
+    border-radius:
+        8px;
+
+    outline:
+        none;
+
+}
+
+input:focus {
+
+    border-color:
+        #5e9cff;
+
+}
+
+.primary {
+
+    background:
+        #3479df;
+
+}
+
+.danger {
+
+    background:
+        #913d45;
+
+}
+
+
+/* MODAL */
+
+.modal-bg {
+
+    display:
+        none;
+
+    position:
+        fixed;
+
+    inset:
+        0;
+
+    background:
+        rgba(0,0,0,.75);
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    padding:
+        20px;
+
+}
+
+.modal {
+
+    width:
+        min(650px, 100%);
+
+    max-height:
+        90vh;
+
+    overflow:
+        auto;
+
+    background:
+        #101620;
+
+    border:
+        1px solid #293544;
+
+    border-radius:
+        15px;
+
+    padding:
+        25px;
+
+}
+
+.modal h2 {
+
+    margin-top:
+        0;
+
+}
+
+.modal-close {
+
+    float:
+        right;
+
+    background:
+        #303b49;
+
+}
+
+.detail {
+
+    margin-top:
+        15px;
+
+    padding:
+        15px;
+
+    background:
+        #0a1017;
+
+    border:
+        1px solid #293544;
+
+    border-radius:
+        10px;
+
+}
+
+.detail-row {
+
+    padding:
+        9px 0;
+
+    border-bottom:
+        1px solid #202a37;
+
+}
+
+@media(max-width: 900px) {
+
+    .stats {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+    }
+
+    .devices {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+}
+
+@media(max-width: 600px) {
+
+    .stats {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+    .form-grid {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+
+<header>
+
+    <div class="logo">
+
+        NETWORK
+        <span>DASHBOARD</span>
+
+    </div>
+
+    <nav>
+
+        <a href="/index.html">
+            Tickets
+        </a>
+
+        <a href="/dashboard.html">
+            Dashboard
+        </a>
+	<a href="http://192.168.1.183:3000">Portail</a>
+    </nav>
+
+</header>
+
+
+<div class="container">
+
+
+    <h1>
+        📊 Network Dashboard
+    </h1>
+
+    <p class="subtitle">
+        Supervision des équipements réseau
+    </p>
+
+
+    <!-- STATS -->
+
+    <div class="stats">
+
+
+        <div class="stat">
+
+            <div class="stat-title">
+                🟢 OPÉRATIONNELS
+            </div>
+
+            <div
+                id="operational"
+                class="stat-number green"
+            >
+                0
+            </div>
+
+        </div>
+
+
+        <div class="stat">
+
+            <div class="stat-title">
+                🔴 PROBLÈMES
+            </div>
+
+            <div
+                id="problem"
+                class="stat-number red"
+            >
+                0
+            </div>
+
+        </div>
+
+
+        <div class="stat">
+
+            <div class="stat-title">
+                🎫 TICKETS ACTIFS
+            </div>
+
+            <div
+                id="openTickets"
+                class="stat-number blue"
+            >
+                0
+            </div>
+
+        </div>
+
+
+        <div class="stat">
+
+            <div class="stat-title">
+                📡 TOTAL APPAREILS
+            </div>
+
+            <div
+                id="total"
+                class="stat-number"
+            >
+                0
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- DEVICES -->
+
+    <h2>
+        Appareils réseau
+    </h2>
+
+    <div
+        id="devices"
+        class="devices"
+    >
+    </div>
+
+
+    <!-- ADD DEVICE -->
+
+    <div class="card add-card">
+
+        <h2>
+            ➕ Ajouter un appareil
+        </h2>
+
+        <p class="subtitle">
+            Configure toi-même les informations de ton routeur ou équipement réseau.
+        </p>
+
+
+        <div class="form-grid">
+
+
+            <div>
+
+                <label>
+                    Nom
+                </label>
+
+                <input
+                    id="newName"
+                    placeholder="Ex : Routeur Chambre"
+                >
+
+            </div>
+
+
+            <div>
+
+                <label>
+                    Position
+                </label>
+
+                <input
+                    id="newPosition"
+                    placeholder="Ex : Chambre"
+                >
+
+            </div>
+
+
+            <div>
+
+                <label>
+                    Adresse MAC
+                </label>
+
+                <input
+                    id="newMac"
+                    placeholder="Ex : AA:BB:CC:DD:EE:FF"
+                >
+
+            </div>
+
+
+            <div>
+
+                <label>
+                    SSID
+                </label>
+
+                <input
+                    id="newSsid"
+                    placeholder="Ex : Maison-5G"
+                >
+
+            </div>
+
+
+            <div>
+
+                <label>
+                    Modèle
+                </label>
+
+                <input
+                    id="newModel"
+                    placeholder="Ex : TP-Link Archer AX55"
+                >
+
+            </div>
+
+
+            <div>
+
+                <label>
+                    Adresse IP
+                </label>
+
+                <input
+                    id="newIp"
+                    placeholder="Ex : 192.168.1.170"
+                >
+
+            </div>
+
+        </div>
+
+
+        <button
+            class="primary"
+            onclick="addDevice()"
+        >
+            ➕ AJOUTER L'APPAREIL
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- MODAL -->
+
+<div
+    id="modalBg"
+    class="modal-bg"
+>
+
+    <div class="modal">
+
+        <button
+            class="modal-close"
+            onclick="closeModal()"
+        >
+            ✕
+        </button>
+
+        <h2 id="modalTitle">
+            Détails
+        </h2>
+
+        <div id="modalContent">
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+let state = {
+
+    devices: [],
+
+    tickets: []
+
+};
+
+
+/* --------------------------------
+   API
+-------------------------------- */
+
+async function getState() {
+
+    const response =
+        await fetch(
+            "/api/state"
+        );
+
+    state =
+        await response.json();
+
+    render();
+
+}
+
+
+async function api(
+    url,
+    options = {}
+) {
+
+    const response =
+        await fetch(
+            url,
+            {
+                ...options,
+
+                headers: {
+
+                    "Content-Type":
+                        "application/json",
+
+                    ...(options.headers || {})
+
+                }
+
+            }
+        );
+
+
+    const result =
+        await response.json();
+
+
+    if (!response.ok) {
+
+        throw new Error(
+            result.error ||
+            "Erreur serveur"
+        );
+
+    }
+
+
+    return result;
+
+}
+
+
+/* --------------------------------
+   ADD DEVICE
+-------------------------------- */
+
+async function addDevice() {
+
+    const payload = {
+
+        name:
+            document.getElementById(
+                "newName"
+            ).value,
+
+        position:
+            document.getElementById(
+                "newPosition"
+            ).value,
+
+        mac:
+            document.getElementById(
+                "newMac"
+            ).value,
+
+        ssid:
+            document.getElementById(
+                "newSsid"
+            ).value,
+
+        model:
+            document.getElementById(
+                "newModel"
+            ).value,
+
+        ip:
+            document.getElementById(
+                "newIp"
+            ).value
+
+    };
+
+
+    try {
+
+        await api(
+            "/api/devices",
+            {
+                method: "POST",
+
+                body:
+                    JSON.stringify(
+                        payload
+                    )
+            }
+        );
+
+
+        document
+            .querySelectorAll(
+                ".add-card input"
+            )
+            .forEach(
+                input =>
+                    input.value = ""
+            );
+
+
+        alert(
+            "Appareil ajouté."
+        );
+
+
+    } catch(error) {
+
+        alert(
+            error.message
+        );
+
+    }
+
+}
+
+
+/* --------------------------------
+   RENDER
+-------------------------------- */
+
+function render() {
+
+    const container =
+        document.getElementById(
+            "devices"
+        );
+
+    container.innerHTML = "";
+
+
+    let operational = 0;
+
+    let problem = 0;
+
+
+    state.devices.forEach(
+        device => {
+
+
+        const activeTicket =
+            state.tickets.find(
+
+                ticket =>
+
+                    ticket.deviceId ===
+                    device.id &&
+
+                    ticket.status !==
+                    "CLOSED"
+
+            );
+
+
+        const isProblem =
+            Boolean(activeTicket);
+
+
+        if (isProblem) {
+
+            problem++;
+
+        } else {
+
+            operational++;
+
+        }
+
+
+        const div =
+            document.createElement(
+                "div"
+            );
+
+
+        div.className =
+            "device" +
+            (
+                isProblem
+                ? " problem"
+                : ""
+            );
+
+
+        div.innerHTML = `
+
+            <div class="device-header">
+
+                <div class="device-name">
+
+                    ${escapeHtml(
+                        device.name
+                    )}
+
+                </div>
+
+
+                <div class="badge ${
+                    isProblem
+                    ? "problem-badge"
+                    : "operational"
+                }">
+
+                    ${
+                        isProblem
+                        ? "🔴 PROBLÈME"
+                        : "🟢 OPÉRATIONNEL"
+                    }
+
+                </div>
+
+            </div>
+
+
+            <div class="info">
+
+
+                <div class="row">
+
+                    <span class="label">
+                        Position
+                    </span>
+
+                    <span class="value">
+                        ${escapeHtml(
+                            device.position
+                        )}
+                    </span>
+
+                </div>
+
+
+                <div class="row">
+
+                    <span class="label">
+                        Modèle
+                    </span>
+
+                    <span class="value">
+                        ${escapeHtml(
+                            device.model
+                        )}
+                    </span>
+
+                </div>
+
+
+                <div class="row">
+
+                    <span class="label">
+                        SSID
+                    </span>
+
+                    <span class="value">
+                        ${escapeHtml(
+                            device.ssid
+                        )}
+                    </span>
+
+                </div>
+
+
+                <div class="row">
+
+                    <span class="label">
+                        IP
+                    </span>
+
+                    <span class="value">
+                        ${escapeHtml(
+                            device.ip
+                        )}
+                    </span>
+
+                </div>
+
+
+                <div class="row">
+
+                    <span class="label">
+                        MAC
+                    </span>
+
+                    <span class="value">
+                        ${escapeHtml(
+                            device.mac
+                        )}
+                    </span>
+
+                </div>
+
+
+            </div>
+
+
+            ${
+                activeTicket
+
+                ?
+
+                `
+
+                <div class="ticket">
+
+                    <div>
+                        Ticket actif
+                    </div>
+
+                    <div class="ticket-number">
+
+                        #${activeTicket.number}
+
+                    </div>
+
+                    <div class="reason">
+
+                        ${escapeHtml(
+                            activeTicket.reason
+                        )}
+
+                    </div>
+
+                </div>
+
+                `
+
+                :
+
+                `
+
+                <div class="ticket">
+
+                    <span class="green">
+
+                        ✓ Aucun incident actif
+
+                    </span>
+
+                </div>
+
+                `
+
+            }
+
+
+            <button
+                onclick="openDetails('${device.id}')"
+            >
+
+                👁 Détails
+
+            </button>
+
+
+            ${
+                !activeTicket
+
+                ?
+
+                `<button
+                    class="danger"
+                    onclick="deleteDevice('${device.id}')"
+                >
+                    🗑 Supprimer
+                </button>`
+
+                :
+
+                ""
+
+            }
+
+        `;
+
+
+        container.appendChild(
+            div
+        );
+
+
+    });
+
+
+    document.getElementById(
+        "operational"
+    ).textContent =
+        `${operational} / ${state.devices.length}`;
+
+
+    document.getElementById(
+        "problem"
+    ).textContent =
+        problem;
+
+
+    document.getElementById(
+        "openTickets"
+    ).textContent =
+
+        state.tickets.filter(
+            t =>
+                t.status !==
+                "CLOSED"
+        ).length;
+
+
+    document.getElementById(
+        "total"
+    ).textContent =
+        state.devices.length;
+
+}
+
+
+/* --------------------------------
+   DETAILS
+-------------------------------- */
+
+function openDetails(
+    deviceId
+) {
+
+    const device =
+        state.devices.find(
+            d =>
+                d.id === deviceId
+        );
+
+
+    if (!device)
+        return;
+
+
+    const ticket =
+        state.tickets.find(
+
+            t =>
+
+                t.deviceId ===
+                deviceId &&
+
+                t.status !==
+                "CLOSED"
+
+        );
+
+
+    document.getElementById(
+        "modalTitle"
+    ).textContent =
+        device.name;
+
+
+    let html = `
+
+        <div class="detail">
+
+            <div class="detail-row">
+
+                <b>Position :</b>
+                ${escapeHtml(
+                    device.position
+                )}
+
+            </div>
+
+
+            <div class="detail-row">
+
+                <b>Modèle :</b>
+                ${escapeHtml(
+                    device.model
+                )}
+
+            </div>
+
+
+            <div class="detail-row">
+
+                <b>SSID :</b>
+                ${escapeHtml(
+                    device.ssid
+                )}
+
+            </div>
+
+
+            <div class="detail-row">
+
+                <b>IP :</b>
+                ${escapeHtml(
+                    device.ip
+                )}
+
+            </div>
+
+
+            <div class="detail-row">
+
+                <b>MAC :</b>
+                ${escapeHtml(
+                    device.mac
+                )}
+
+            </div>
+
+
+            <div class="detail-row">
+
+                <b>État :</b>
+
+                ${
+                    ticket
+                    ? "🔴 PROBLÈME"
+                    : "🟢 OPÉRATIONNEL"
+                }
+
+            </div>
+
+        </div>
+
+    `;
+
+
+    if (ticket) {
+
+        html += `
+
+            <div class="detail">
+
+                <h3>
+                    🎫 Ticket actif
+                </h3>
+
+
+                <div class="detail-row">
+
+                    <b>Numéro :</b>
+
+                    <span
+                        class="ticket-number"
+                    >
+                        #${ticket.number}
+                    </span>
+
+                </div>
+
+
+                <div class="detail-row">
+
+                    <b>Statut :</b>
+
+                    ${escapeHtml(
+                        ticket.status
+                    )}
+
+                </div>
+
+
+                <div class="detail-row">
+
+                    <b>Raison :</b>
+
+                    ${escapeHtml(
+                        ticket.reason
+                    )}
+
+                </div>
+
+
+                <div class="detail-row">
+
+                    <b>Créé :</b>
+
+                    ${formatDate(
+                        ticket.created
+                    )}
+
+                </div>
+
+            </div>
+
+        `;
+
+    }
+
+
+    document.getElementById(
+        "modalContent"
+    ).innerHTML =
+        html;
+
+
+    document.getElementById(
+        "modalBg"
+    ).style.display =
+        "flex";
+
+}
+
+
+/* --------------------------------
+   DELETE
+-------------------------------- */
+
+async function deleteDevice(
+    id
+) {
+
+    const device =
+        state.devices.find(
+            d => d.id === id
+        );
+
+
+    if (!device)
+        return;
+
+
+    if (!confirm(
+        `Supprimer "${device.name}" ?`
+    )) {
+        return;
+    }
+
+
+    try {
+
+        await api(
+            `/api/devices/${id}`,
+            {
+                method:
+                    "DELETE"
+            }
+        );
+
+    } catch(error) {
+
+        alert(
+            error.message
+        );
+
+    }
+
+}
+
+
+/* --------------------------------
+   MODAL
+-------------------------------- */
+
+function closeModal() {
+
+    document.getElementById(
+        "modalBg"
+    ).style.display =
+        "none";
+
+}
+
+
+/* --------------------------------
+   HELPERS
+-------------------------------- */
+
+function escapeHtml(text) {
+
+    return String(text)
+
+        .replaceAll(
+            "&",
+            "&amp;"
+        )
+
+        .replaceAll(
+            "<",
+            "&lt;"
+        )
+
+        .replaceAll(
+            ">",
+            "&gt;"
+        )
+
+        .replaceAll(
+            '"',
+            "&quot;"
+        )
+
+        .replaceAll(
+            "'",
+            "&#039;"
+        );
+
+}
+
+
+function formatDate(value) {
+
+    return new Date(value)
+        .toLocaleString(
+            "fr-FR"
+        );
+
+}
+
+
+/* --------------------------------
+   REAL TIME
+-------------------------------- */
+
+const events =
+    new EventSource(
+        "/api/events"
+    );
+
+
+events.addEventListener(
+    "state",
+    event => {
+
+        const message =
+            JSON.parse(
+                event.data
+            );
+
+        state =
+            message.data;
+
+        render();
+
+    }
+);
+
+
+getState();
+
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0a0f0d">
+  <title>MultiSiteServer — Control Center</title>
+<link rel="icon" type="image/png" href="https://s2.qwant.com/thumbr/474x394/f/f/1f4c49466c5367fd48a83a5b35920ddfd6934ee3de26a812c16d75265f2842/OIP.xed996Xh7lkMIv-GXJDkTQHaGK.jpg?u=https%3A%2F%2Ftse.mm.bing.net%2Fth%2Fid%2FOIP.xed996Xh7lkMIv-GXJDkTQHaGK%3Fpid%3DApi&q=0&b=1&p=0&a=0">
+  <link rel="stylesheet" href="/style.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="/" aria-label="MultiSiteServer accueil">
+        <span class="brand-mark"><span></span><span></span><span></span></span>
+        <span><strong>MultiSite</strong><small>SERVER CONTROL</small></span>
+      </a>
+      <div class="side-label">ESPACE SERVEUR</div>
+      <nav class="nav">
+        <a class="nav-link active" href="#overview" data-section="overview"><span class="nav-icon">▦</span> Vue d’ensemble</a>
+        <a class="nav-link" href="#services" data-section="services"><span class="nav-icon">◈</span> Mes services <span class="nav-count" id="navServiceCount">3</span></a>
+        <a class="nav-link" href="#applications" data-section="applications"><span class="nav-icon">▤</span> Applications</a>
+        <a class="nav-link" href="#system" data-section="system"><span class="nav-icon">⌁</span> Système</a>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="server-mini"><span class="pulse-dot"></span><div><strong>Serveur local</strong><small id="sideHost">Connexion en cours…</small></div></div>
+        <div class="side-foot">MULTISITESERVER <span>v2.0</span></div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <button class="mobile-menu" id="mobileMenu" aria-label="Ouvrir le menu">☰</button>
+        <div class="breadcrumb"><span>Infrastructure</span><b>/</b><strong>Control Center</strong></div>
+        <div class="top-actions">
+          <span class="live-label"><span class="pulse-dot"></span> LIVE MONITORING</span>
+          <button class="icon-button" id="refreshBtn" title="Actualiser les données" aria-label="Actualiser">↻</button>
+        </div>
+      </header>
+
+      <section class="page-section" id="overview">
+        <div class="page-heading">
+          <div><div class="eyebrow">TABLEAU DE BORD / LOCAL</div><h1>Centre de contrôle<span class="green">.</span></h1><p>Un aperçu de tes services et de la machine qui les héberge.</p></div>
+          <div class="clock-block"><span id="currentDate">--</span><strong id="currentTime">--:--:--</strong></div>
+        </div>
+
+        <div class="hero-card">
+          <div class="hero-copy"><div class="hero-tag"><span class="pulse-dot"></span> ENVIRONNEMENT LOCAL</div><h2>Ton infrastructure,<br><span>en un seul endroit.</span></h2><p>Accède à tes sites, vérifie leur disponibilité et surveille les ressources de ton serveur.</p><a class="primary-button" href="#services">Explorer les services <span>↗</span></a></div>
+          <div class="hero-graphic" aria-hidden="true"><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="server-stack"><div class="server-unit"><i></i><i></i><i></i><b></b></div><div class="server-unit"><i></i><i></i><i></i><b></b></div><div class="server-unit"><i></i><i></i><i></i><b></b></div></div><div class="graphic-caption"><span class="pulse-dot"></span> LOCAL NODE / ACTIVE</div></div>
+        </div>
+
+        <div class="section-title-row"><div><div class="eyebrow">ÉTAT GÉNÉRAL</div><h2>Vue système</h2></div><span class="muted tiny" id="lastUpdated">Actualisation en cours…</span></div>
+        <div class="metric-grid">
+          <article class="metric-card"><div class="metric-top"><span>Processeur</span><span class="metric-icon">⌘</span></div><div class="metric-value"><strong id="cpuValue">—</strong><span>%</span></div><div class="meter"><span id="cpuBar"></span></div><div class="metric-foot"><span>Utilisation estimée</span><span id="cpuDetail">Calcul en cours</span></div></article>
+          <article class="metric-card"><div class="metric-top"><span>Mémoire RAM</span><span class="metric-icon">▥</span></div><div class="metric-value"><strong id="ramValue">—</strong><span>%</span></div><div class="meter"><span id="ramBar"></span></div><div class="metric-foot"><span id="ramUsed">— utilisé</span><span id="ramTotal">— total</span></div></article>
+          <article class="metric-card"><div class="metric-top"><span>Stockage système</span><span class="metric-icon">▤</span></div><div class="metric-value"><strong id="diskValue">—</strong><span id="diskUnit">%</span></div><div class="meter"><span id="diskBar"></span></div><div class="metric-foot"><span id="diskUsed">— utilisé</span><span id="diskTotal">— total</span></div></article>
+          <article class="metric-card"><div class="metric-top"><span>Disponibilité</span><span class="metric-icon">◷</span></div><div class="metric-value uptime-value"><strong id="uptimeValue">—</strong></div><div class="metric-foot"><span>Temps depuis le démarrage</span><span class="status-inline"><span class="pulse-dot"></span> En fonctionnement</span></div></article>
+        </div>
+      </section>
+
+      <section class="page-section" id="services">
+        <div class="section-title-row"><div><div class="eyebrow">ACCÈS RAPIDE</div><h2>Mes services <span class="count-pill" id="serviceCount">03</span></h2><p class="section-description">Les boutons ouvrent les services dans un nouvel onglet. L’état est testé automatiquement.</p></div><button class="secondary-button" id="addServiceBtn">＋ Ajouter un service</button></div>
+        <div class="service-grid" id="serviceGrid"></div>
+        <div class="service-note"><span class="note-icon">i</span><span>Les services sont testés depuis ce serveur. Un site peut répondre différemment selon son adresse réseau ou ses règles d’accès.</span></div>
+      </section>
+
+      <section class="page-section" id="applications">
+        <div class="section-title-row"><div><div class="eyebrow">ESPACE PERSONNEL</div><h2>Applications <span class="count-pill">12</span></h2><p class="section-description">Configure tes emplacements. Les modifications sont enregistrées sur le serveur.</p></div><button class="secondary-button" id="resetAppsBtn">Réinitialiser les emplacements</button></div>
+        <div class="apps-grid" id="appsGrid"></div>
+      </section>
+
+      <section class="page-section" id="system">
+        <div class="section-title-row"><div><div class="eyebrow">DIAGNOSTIC LOCAL</div><h2>Informations système</h2><p class="section-description">Données de la machine qui exécute le serveur Node.js.</p></div><span class="source-badge">SOURCE : BACKEND NODE.JS</span></div>
+        <div class="system-grid">
+          <article class="panel system-panel"><div class="panel-heading"><div><span class="panel-icon">⌘</span><strong>Machine</strong></div><span class="live-label small-live">ACTIF</span></div><div class="info-row"><span>Système d’exploitation</span><strong id="osName">—</strong></div><div class="info-row"><span>Architecture</span><strong id="archName">—</strong></div><div class="info-row"><span>Version Node.js</span><strong id="nodeVersion">—</strong></div><div class="info-row"><span>Nom de l’hôte</span><strong id="hostName">—</strong></div><div class="info-row"><span>Nombre de cœurs logiques</span><strong id="cpuCores">—</strong></div></article>
+          <article class="panel system-panel"><div class="panel-heading"><div><span class="panel-icon">◉</span><strong>Réseau et serveur</strong></div></div><div class="info-row"><span>Port du portail</span><strong>3000</strong></div><div class="info-row"><span>Adresse locale</span><strong id="localAddress">http://localhost:3000</strong></div><div class="info-row"><span>État du backend</span><strong class="good-text">Opérationnel</strong></div><div class="info-row"><span>Actualisation</span><strong>Automatique · 5 s</strong></div><div class="info-row"><span>Dernière réponse API</span><strong id="apiLatency">—</strong></div></article>
+        </div>
+        <div class="footer-warning"><span>⚠</span><p><strong>À savoir :</strong> les statistiques décrivent l’ordinateur qui exécute ce portail. Ce tableau de bord ne contrôle pas les services tiers et n’exécute aucune commande système depuis le navigateur.</p></div>
+      </section>
+
+      <footer class="footer"><span><span class="footer-mark">▰</span> MultiSiteServer <span class="muted">/ Control Center</span></span><span>Conçu pour ton réseau local <span class="green">●</span></span></footer>
+    </main>
+  </div>
+
+  <dialog id="serviceDialog" class="modal">
+    <form id="serviceForm" method="dialog">
+      <div class="modal-heading"><div><div class="eyebrow">CONFIGURATION</div><h2 id="serviceDialogTitle">Ajouter un service</h2></div><button type="button" class="modal-close" data-close="serviceDialog">×</button></div>
+      <input type="hidden" id="serviceId">
+      <label>Nom du service<input id="serviceName" maxlength="50" required placeholder="Ex. Network Map"></label>
+      <label>Adresse URL<input id="serviceUrl" type="url" required placeholder="http://localhost:3002"></label>
+      <label>Catégorie<select id="serviceCategory"><option>Outil</option><option>Administration</option><option>Application</option><option>Infrastructure</option></select></label>
+      <div class="modal-actions"><button type="button" class="secondary-button" data-close="serviceDialog">Annuler</button><button class="primary-button" type="submit">Enregistrer <span>✓</span></button></div>
+    </form>
+  </dialog>
+
+  <dialog id="appDialog" class="modal">
+    <form id="appForm" method="dialog">
+      <div class="modal-heading"><div><div class="eyebrow">APPLICATION PERSONNELLE</div><h2>Configurer l’emplacement</h2></div><button type="button" class="modal-close" data-close="appDialog">×</button></div>
+      <input type="hidden" id="appSlot">
+      <label>Nom affiché<input id="appName" maxlength="50" required placeholder="Ex. Mon tableau de bord"></label>
+      <label>Adresse URL<input id="appUrl" type="url" placeholder="http://localhost:3003"></label>
+      <label>Description<input id="appDescription" maxlength="100" placeholder="À quoi sert cette application ?"></label>
+      <div class="modal-actions"><button type="button" class="secondary-button" data-close="appDialog">Annuler</button><button class="primary-button" type="submit">Sauvegarder <span>✓</span></button></div>
+      <p class="form-hint">Laisse l’adresse vide si tu veux garder cet emplacement comme raccourci non configuré.</p>
+    </form>
+  </dialog>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>

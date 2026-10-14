@@ -1,0 +1,65 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0b1220">
+    <title>Internet Check | MultiSiteServer</title>
+    <link rel="stylesheet" href="/style.css">
+    <script src="/script.js" defer></script>
+</head>
+<body>
+    <main class="container">
+        <header class="header">
+            <span class="badge">MULTISITESERVER · PORT 3008</span>
+            <h1>Internet Check</h1>
+            <p>Vérifie si ton serveur peut accéder à Internet et si un site répond.</p>
+        </header>
+
+        <section class="card">
+            <h2>État de la connexion</h2>
+            <div class="status">
+                <span id="statusDot" class="dot"></span>
+                <span id="statusTitle">En attente du test</span>
+            </div>
+            <p id="statusMessage">Lance un test pour vérifier la connexion.</p>
+            <button id="internetButton">Tester Internet</button>
+        </section>
+
+        <section class="card">
+            <h2>Tester un site Web</h2>
+            <label for="siteUrl">Adresse du site</label>
+            <input
+                id="siteUrl"
+                type="url"
+                value="https://example.com"
+                placeholder="https://example.com"
+            >
+            <button id="siteButton">Tester ce site</button>
+            <div id="siteResult" class="result">Aucun test effectué.</div>
+        </section>
+
+        <section class="card">
+            <h2>Détails techniques</h2>
+            <div class="detail">
+                <span>Google</span>
+                <span id="googleResult">En attente</span>
+            </div>
+            <div class="detail">
+                <span>Cloudflare</span>
+                <span id="cloudflareResult">En attente</span>
+            </div>
+            <div class="detail">
+                <span>Dernier test</span>
+                <span id="lastTest">—</span>
+            </div>
+        </section>
+
+        <footer>
+            <p>Internet Check · Service local MultiSiteServer</p>
+            <a href="http://localhost:3000">Retour au portail</a>
+        </footer>
+    </main>
+</body>
+</html>

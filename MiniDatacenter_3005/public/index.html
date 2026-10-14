@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MiniDatacenter</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header class="topbar">
+
+    <div class="brand">
+        <div class="brand-icon">▦</div>
+
+        <div>
+            <h1>MiniDatacenter</h1>
+            <span>Rack Designer · Local Infrastructure</span>
+        </div>
+    </div>
+
+    <div class="top-right">
+        <span id="saveStatus">Sauvegardé</span>
+        <button id="resetBtn" class="btn secondary">Réinitialiser</button>
+    </div>
+
+</header>
+
+
+<main>
+
+    <section class="hero">
+
+        <div>
+            <div class="eyebrow">DATACENTER DESIGNER</div>
+
+            <h2>Construis ton infrastructure.</h2>
+
+            <p>
+                Crée tes racks, ajoute des U, place tes équipements
+                et organise-les avec des étages.
+            </p>
+        </div>
+
+        <button id="newRackBtn" class="btn primary">
+            ＋ Nouveau rack
+        </button>
+
+    </section>
+
+
+    <section class="workspace">
+
+
+        <!-- SIDEBAR -->
+
+        <aside class="sidebar">
+
+            <div class="sidebar-title">
+
+                <strong>Équipements</strong>
+
+                <span>
+                    Sélectionne un équipement puis clique
+                    sur une U libre.
+                </span>
+
+            </div>
+
+
+            <div id="equipmentList" class="equipment-list"></div>
+
+
+            <button id="customObjectBtn" class="custom-btn">
+                ＋ Objet personnalisé
+            </button>
+
+
+            <div class="separator"></div>
+
+
+            <div class="floor-section">
+
+                <div class="floor-title">
+                    <strong>Organisation</strong>
+
+                    <span>
+                        Les étages sont des séparations
+                        et ne consomment aucune U.
+                    </span>
+                </div>
+
+
+                <button id="addFloorBtn" class="floor-btn">
+                    ＋ Ajouter un étage
+                </button>
+
+            </div>
+
+
+            <div class="help">
+
+                <strong>Utilisation</strong>
+
+                <p>1. Crée un rack.</p>
+                <p>2. Ajoute ou retire des U.</p>
+                <p>3. Place tes équipements.</p>
+                <p>4. Ajoute des étages pour séparer les zones.</p>
+                <p>5. Clique sur un équipement pour le modifier.</p>
+                <p>6. Clique sur un étage pour le modifier.</p>
+
+            </div>
+
+        </aside>
+
+
+        <!-- CANVAS -->
+
+        <section class="canvas">
+
+
+            <div class="canvas-header">
+
+                <div>
+
+                    <strong id="rackCount">
+                        0 racks
+                    </strong>
+
+                    <span> · </span>
+
+                    <span id="objectCount">
+                        0 équipements
+                    </span>
+
+                    <span> · </span>
+
+                    <span id="floorCount">
+                        0 étages
+                    </span>
+
+                </div>
+
+
+                <div class="zoom">
+
+                    <button id="zoomOut">−</button>
+
+                    <span id="zoomLabel">
+                        100%
+                    </span>
+
+                    <button id="zoomIn">＋</button>
+
+                </div>
+
+            </div>
+
+
+            <div id="racks" class="racks"></div>
+
+
+            <div id="emptyState" class="empty-state">
+
+                <div class="empty-icon">▤</div>
+
+                <h3>Aucun rack</h3>
+
+                <p>
+                    Crée ton premier rack pour commencer.
+                </p>
+
+                <button
+                    id="emptyNewRack"
+                    class="btn primary"
+                >
+                    Créer un rack
+                </button>
+
+            </div>
+
+        </section>
+
+    </section>
+
+</main>
+
+
+<!-- MODALE -->
+
+<div id="modal" class="modal hidden">
+
+    <div class="modal-box">
+
+        <div class="modal-header">
+
+            <div>
+
+                <span
+                    id="modalType"
+                    class="eyebrow"
+                >
+                    RACK
+                </span>
+
+                <h3 id="modalTitle">
+                    Nouveau rack
+                </h3>
+
+            </div>
+
+
+            <button
+                id="closeModal"
+                class="close"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <form id="modalForm"></form>
+
+    </div>
+
+</div>
+
+
+<!-- TOAST -->
+
+<div id="toast" class="toast"></div>
+
+
+<script src="app.js"></script>
+
+</body>
+</html>
